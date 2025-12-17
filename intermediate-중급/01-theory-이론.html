@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+    ✨ Live Server로 실행하기
+    1. VS Code에서 이 파일을 엽니다
+    2. 파일 우클릭 → "Open with Live Server" 선택
+    3. 브라우저가 자동으로 열립니다
+    4. 파일 수정시 자동으로 새로고침됩니다
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중급 - Flexbox, Grid, 반응형 디자인 이론</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 5px solid #e74c3c;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #e74c3c;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            border-left: 6px solid #e74c3c;
+            padding-left: 20px;
+            font-size: 2em;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .visual-demo {
+            border: 3px solid #3498db;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+            background: #ecf0f1;
+        }
+        .tip {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        /* Flexbox 시각화 */
+        .flex-container-demo {
+            display: flex;
+            background: #3498db;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .flex-item-demo {
+            background: #e74c3c;
+            color: white;
+            padding: 20px;
+            margin: 5px;
+            text-align: center;
+            border-radius: 3px;
+        }
+        
+        /* Grid 시각화 */
+        .grid-container-demo {
+            display: grid;
+            gap: 10px;
+            background: #16a085;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .grid-item-demo {
+            background: #f39c12;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 중급 과정 - Flexbox, Grid, 반응형 디자인 이론</h1>
+        <p><strong>학습 목표:</strong> 현대적인 레이아웃 기법과 반응형 웹 디자인을 마스터합니다.</p>
+
+        <!-- ==================== FLEXBOX ==================== -->
+        <h2>📌 Part 1: Flexbox (유연한 박스 레이아웃)</h2>
+
+        <div class="section">
+            <h3>1.1 Flexbox란?</h3>
+            <p><strong>Flexbox</strong>는 1차원 레이아웃 시스템으로, <strong>가로(row)</strong> 또는 <strong>세로(column)</strong> 방향으로 아이템을 배치합니다.</p>
+            <ul>
+                <li>✅ 정렬, 배분, 순서 변경이 매우 쉬움</li>
+                <li>✅ 반응형 디자인에 최적화</li>
+                <li>✅ 실무에서 가장 많이 사용</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>1.2 Flexbox 기본 구조</h3>
+            <div class="code-block">
+.container {
+    display: flex;  /* Flex 컨테이너 생성 */
+}
+
+.item {
+    /* Flex 아이템 */
+}
+            </div>
+            <p><strong>용어:</strong></p>
+            <ul>
+                <li><strong>Flex Container:</strong> display: flex가 적용된 부모 요소</li>
+                <li><strong>Flex Item:</strong> Flex Container의 직접적인 자식 요소</li>
+                <li><strong>Main Axis:</strong> 주축 (기본: 가로)</li>
+                <li><strong>Cross Axis:</strong> 교차축 (기본: 세로)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>1.3 Flex Container 속성</h3>
+            
+            <h4>① flex-direction (방향)</h4>
+            <div class="code-block">
+flex-direction: row;            /* 가로 (기본값) */
+flex-direction: row-reverse;    /* 가로 역방향 */
+flex-direction: column;         /* 세로 */
+flex-direction: column-reverse; /* 세로 역방향 */
+            </div>
+
+            <div class="visual-demo">
+                <p><strong>row (가로):</strong></p>
+                <div class="flex-container-demo" style="flex-direction: row;">
+                    <div class="flex-item-demo">1</div>
+                    <div class="flex-item-demo">2</div>
+                    <div class="flex-item-demo">3</div>
+                </div>
+
+                <p><strong>column (세로):</strong></p>
+                <div class="flex-container-demo" style="flex-direction: column;">
+                    <div class="flex-item-demo">1</div>
+                    <div class="flex-item-demo">2</div>
+                    <div class="flex-item-demo">3</div>
+                </div>
+            </div>
+
+            <h4>② justify-content (주축 정렬)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>값</th>
+                        <th>설명</th>
+                        <th>용도</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>flex-start</code></td>
+                        <td>시작점 정렬 (기본값)</td>
+                        <td>왼쪽 정렬</td>
+                    </tr>
+                    <tr>
+                        <td><code>flex-end</code></td>
+                        <td>끝점 정렬</td>
+                        <td>오른쪽 정렬</td>
+                    </tr>
+                    <tr>
+                        <td><code>center</code></td>
+                        <td>중앙 정렬</td>
+                        <td>가운데 정렬</td>
+                    </tr>
+                    <tr>
+                        <td><code>space-between</code></td>
+                        <td>양쪽 끝 배치 후 균등 분배</td>
+                        <td>아이템 사이 간격</td>
+                    </tr>
+                    <tr>
+                        <td><code>space-around</code></td>
+                        <td>아이템 주변에 균등 간격</td>
+                        <td>전체 균등 배치</td>
+                    </tr>
+                    <tr>
+                        <td><code>space-evenly</code></td>
+                        <td>모든 간격 동일</td>
+                        <td>완전 균등 배치</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="visual-demo">
+                <p><strong>space-between:</strong></p>
+                <div class="flex-container-demo" style="justify-content: space-between;">
+                    <div class="flex-item-demo">1</div>
+                    <div class="flex-item-demo">2</div>
+                    <div class="flex-item-demo">3</div>
+                </div>
+
+                <p><strong>center:</strong></p>
+                <div class="flex-container-demo" style="justify-content: center;">
+                    <div class="flex-item-demo">1</div>
+                    <div class="flex-item-demo">2</div>
+                    <div class="flex-item-demo">3</div>
+                </div>
+            </div>
+
+            <h4>③ align-items (교차축 정렬)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>값</th>
+                        <th>설명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>stretch</code></td>
+                        <td>늘려서 채우기 (기본값)</td>
+                    </tr>
+                    <tr>
+                        <td><code>flex-start</code></td>
+                        <td>위쪽 정렬</td>
+                    </tr>
+                    <tr>
+                        <td><code>flex-end</code></td>
+                        <td>아래쪽 정렬</td>
+                    </tr>
+                    <tr>
+                        <td><code>center</code></td>
+                        <td>수직 중앙 정렬</td>
+                    </tr>
+                    <tr>
+                        <td><code>baseline</code></td>
+                        <td>텍스트 베이스라인 정렬</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>④ flex-wrap (줄 바꿈)</h4>
+            <div class="code-block">
+flex-wrap: nowrap;   /* 한 줄에 모두 배치 (기본값) */
+flex-wrap: wrap;     /* 넘치면 다음 줄로 */
+flex-wrap: wrap-reverse; /* 역방향 줄 바꿈 */
+            </div>
+
+            <h4>⑤ gap (간격)</h4>
+            <div class="code-block">
+gap: 20px;           /* 모든 방향 20px */
+gap: 10px 20px;      /* 세로 10px, 가로 20px */
+row-gap: 15px;       /* 세로 간격만 */
+column-gap: 25px;    /* 가로 간격만 */
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>1.4 Flex Item 속성</h3>
+            
+            <h4>① flex-grow (확대)</h4>
+            <p>남은 공간을 얼마나 차지할지 비율로 지정</p>
+            <div class="code-block">
+.item1 { flex-grow: 1; }  /* 1배 */
+.item2 { flex-grow: 2; }  /* 2배 (2배 더 크게) */
+            </div>
+
+            <h4>② flex-shrink (축소)</h4>
+            <p>공간이 부족할 때 얼마나 줄어들지 지정</p>
+            <div class="code-block">
+flex-shrink: 1;  /* 축소 가능 (기본값) */
+flex-shrink: 0;  /* 축소 불가 */
+            </div>
+
+            <h4>③ flex-basis (기본 크기)</h4>
+            <div class="code-block">
+flex-basis: 200px;  /* 기본 너비 200px */
+flex-basis: auto;   /* 내용 크기 (기본값) */
+            </div>
+
+            <h4>④ flex (축약형) - 실무 필수!</h4>
+            <div class="code-block">
+flex: 1;           /* flex-grow: 1, flex-shrink: 1, flex-basis: 0 */
+flex: 0 0 auto;    /* 고정 크기 */
+flex: 1 1 300px;   /* grow, shrink, basis 모두 지정 */
+            </div>
+
+            <div class="tip">
+                <strong>💡 실무 팁:</strong><br>
+                <code>flex: 1</code>은 "남은 공간을 동등하게 나눠 가져라"는 의미로 매우 자주 사용됩니다!
+            </div>
+        </div>
+
+        <!-- ==================== GRID ==================== -->
+        <h2>📌 Part 2: Grid (격자 레이아웃)</h2>
+
+        <div class="section">
+            <h3>2.1 Grid란?</h3>
+            <p><strong>Grid</strong>는 2차원 레이아웃 시스템으로, <strong>가로와 세로</strong>를 동시에 제어합니다.</p>
+            <ul>
+                <li>✅ 복잡한 레이아웃 구현 가능</li>
+                <li>✅ 행(row)과 열(column) 동시 제어</li>
+                <li>✅ 웹 페이지 전체 레이아웃에 적합</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>2.2 Grid 기본 구조</h3>
+            <div class="code-block">
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* 3개 컬럼, 동일 크기 */
+    grid-template-rows: 100px 200px;     /* 2개 행 */
+    gap: 20px;
+}
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>2.3 Grid Container 속성</h3>
+            
+            <h4>① grid-template-columns (컬럼 정의)</h4>
+            <div class="code-block">
+/* 픽셀 단위 */
+grid-template-columns: 200px 300px 400px;
+
+/* 비율 단위 (fr) */
+grid-template-columns: 1fr 2fr 1fr;  /* 1:2:1 비율 */
+
+/* 자동 크기 */
+grid-template-columns: auto 1fr auto;
+
+/* repeat 함수 */
+grid-template-columns: repeat(3, 1fr);  /* 3개 컬럼, 동일 크기 */
+
+/* 혼합 */
+grid-template-columns: 200px 1fr 2fr;
+            </div>
+
+            <h4>② grid-template-rows (행 정의)</h4>
+            <div class="code-block">
+grid-template-rows: 100px 200px;
+grid-template-rows: repeat(3, 150px);
+grid-template-rows: auto 1fr auto;  /* 헤더-콘텐츠-푸터 */
+            </div>
+
+            <h4>③ gap (간격)</h4>
+            <div class="code-block">
+gap: 20px;              /* 모든 간격 20px */
+gap: 10px 20px;         /* 행 간격 10px, 열 간격 20px */
+row-gap: 15px;
+column-gap: 25px;
+            </div>
+
+            <div class="visual-demo">
+                <p><strong>3x3 Grid 예제:</strong></p>
+                <div class="grid-container-demo" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="grid-item-demo">1</div>
+                    <div class="grid-item-demo">2</div>
+                    <div class="grid-item-demo">3</div>
+                    <div class="grid-item-demo">4</div>
+                    <div class="grid-item-demo">5</div>
+                    <div class="grid-item-demo">6</div>
+                    <div class="grid-item-demo">7</div>
+                    <div class="grid-item-demo">8</div>
+                    <div class="grid-item-demo">9</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>2.4 Grid Item 배치</h3>
+            
+            <h4>① grid-column (컬럼 위치)</h4>
+            <div class="code-block">
+.item {
+    grid-column: 1 / 3;    /* 1번 라인부터 3번 라인까지 */
+    grid-column: span 2;   /* 2개 컬럼 차지 */
+}
+            </div>
+
+            <h4>② grid-row (행 위치)</h4>
+            <div class="code-block">
+.item {
+    grid-row: 1 / 4;       /* 1번 라인부터 4번 라인까지 */
+    grid-row: span 3;      /* 3개 행 차지 */
+}
+            </div>
+
+            <h4>③ grid-area (영역 이름으로 배치)</h4>
+            <div class="code-block">
+.container {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "sidebar main main"
+        "footer footer footer";
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }
+            </div>
+
+            <div class="tip">
+                <strong>💡 실무 팁:</strong> grid-template-areas는 가독성이 좋아서 페이지 전체 레이아웃에 자주 사용됩니다!
+            </div>
+        </div>
+
+        <!-- ==================== 반응형 디자인 ==================== -->
+        <h2>📌 Part 3: 반응형 디자인 (Responsive Design)</h2>
+
+        <div class="section">
+            <h3>3.1 반응형 디자인이란?</h3>
+            <p>하나의 웹사이트가 <strong>모든 기기(데스크톱, 태블릿, 모바일)</strong>에서 최적화되어 보이도록 하는 기법입니다.</p>
+            <ul>
+                <li>✅ 미디어 쿼리 사용</li>
+                <li>✅ 유연한 레이아웃 (Flexbox, Grid)</li>
+                <li>✅ 유연한 이미지 (max-width: 100%)</li>
+                <li>✅ viewport 설정</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>3.2 viewport 설정 (필수!)</h3>
+            <div class="code-block">
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+            </div>
+            <p>모바일 기기에서 올바른 크기로 표시되도록 합니다.</p>
+        </div>
+
+        <div class="section">
+            <h3>3.3 미디어 쿼리 (Media Queries)</h3>
+            <p>화면 크기에 따라 다른 CSS를 적용합니다.</p>
+
+            <h4>기본 문법</h4>
+            <div class="code-block">
+/* 768px 이하 (태블릿, 모바일) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+/* 992px 이상 (데스크톱) */
+@media (min-width: 992px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+/* 범위 지정 */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* 태블릿 전용 스타일 */
+}
+            </div>
+
+            <h4>실무 브레이크포인트</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>기기</th>
+                        <th>화면 크기</th>
+                        <th>미디어 쿼리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>모바일 (세로)</td>
+                        <td>~ 576px</td>
+                        <td><code>@media (max-width: 576px)</code></td>
+                    </tr>
+                    <tr>
+                        <td>모바일 (가로) / 태블릿 (세로)</td>
+                        <td>576px ~ 768px</td>
+                        <td><code>@media (min-width: 576px)</code></td>
+                    </tr>
+                    <tr>
+                        <td>태블릿 (가로)</td>
+                        <td>768px ~ 992px</td>
+                        <td><code>@media (min-width: 768px)</code></td>
+                    </tr>
+                    <tr>
+                        <td>데스크톱</td>
+                        <td>992px ~ 1200px</td>
+                        <td><code>@media (min-width: 992px)</code></td>
+                    </tr>
+                    <tr>
+                        <td>대형 데스크톱</td>
+                        <td>1200px ~</td>
+                        <td><code>@media (min-width: 1200px)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>3.4 반응형 레이아웃 패턴</h3>
+            
+            <h4>① 컬럼 드롭 (Column Drop)</h4>
+            <div class="code-block">
+/* 데스크톱: 3컬럼 */
+.container {
+    display: flex;
+    gap: 20px;
+}
+.item {
+    flex: 1;
+}
+
+/* 태블릿: 2컬럼 */
+@media (max-width: 768px) {
+    .container {
+        flex-wrap: wrap;
+    }
+    .item {
+        flex: 0 0 calc(50% - 10px);
+    }
+}
+
+/* 모바일: 1컬럼 */
+@media (max-width: 576px) {
+    .item {
+        flex: 0 0 100%;
+    }
+}
+            </div>
+
+            <h4>② Grid 반응형</h4>
+            <div class="code-block">
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* auto-fit: 자동으로 컬럼 수 조정 */
+/* minmax(250px, 1fr): 최소 250px, 최대 1fr */
+            </div>
+
+            <div class="tip">
+                <strong>💡 실무 팁:</strong> auto-fit과 minmax를 조합하면 미디어 쿼리 없이도 반응형을 구현할 수 있습니다!
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>3.5 반응형 이미지</h3>
+            <div class="code-block">
+img {
+    max-width: 100%;     /* 부모 요소보다 크지 않게 */
+    height: auto;        /* 비율 유지 */
+}
+
+/* 고해상도 대응 */
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+    .logo {
+        background-image: url('logo@2x.png');
+    }
+}
+            </div>
+        </div>
+
+        <div class="warning">
+            <h3>⚠️ 주의사항</h3>
+            <ul>
+                <li>모바일 우선(Mobile-First) 접근 권장</li>
+                <li>미디어 쿼리 순서 중요 (작은 화면 → 큰 화면)</li>
+                <li>테스트는 실제 기기에서 확인</li>
+                <li>성능 고려 (이미지 최적화, 불필요한 리소스 제거)</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
+            <h2 style="color: white; border: none; margin: 0;">✅ 중급 이론 완료!</h2>
+            <p style="margin-top: 20px; font-size: 1.2em;">이제 실습으로 블로그 레이아웃을 만들어보세요! 🚀</p>
+        </div>
+    </div>
+</body>
+</html>

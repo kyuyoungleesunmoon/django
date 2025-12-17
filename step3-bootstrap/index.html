@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3단계: Bootstrap - 생산성 높이기</title>
+    <!-- Bootstrap 5 CDN CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 70px;
+            background-color: #f8f9fa;
+        }
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .demo-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+        .code-example {
+            background-color: #f5f5f5;
+            border-left: 4px solid #555;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== 네비게이션 바 (Navbar) ===== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#top">
+                <strong>📚 Bootstrap 3단계</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#grid">Grid System</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#buttons">Buttons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cards">Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#modal">Modal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#form">Form</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- 헤더 -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h1 class="display-4">3단계: Bootstrap - 생산성 높이기</h1>
+                <p class="lead">장고 개발자가 초기 프로토타입을 만들 때 가장 많이 사용하는 CSS 프레임워크입니다.</p>
+                <p class="text-muted">Bootstrap은 CDN으로 로드되어 즉시 사용 가능한 컴포넌트를 제공합니다.</p>
+            </div>
+        </div>
+
+        <!-- ===== 1. CDN 연결 ===== -->
+        <section>
+            <h2 class="section-title" id="cdn">1. CDN 연결</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">외부 라이브러리를 HTML에 로드하는 법</h5>
+                            <p class="card-text">이 페이지도 Bootstrap을 CDN으로 로드하고 있습니다:</p>
+                            <div class="code-example">
+                                <pre>&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+...
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</pre>
+                            </div>
+                            <p class="text-muted"><strong>장점:</strong> 파일을 다운로드하지 않아도 바로 사용 가능합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 2. Grid System (12컬럼) ===== -->
+        <section>
+            <h2 class="section-title" id="grid">2. Grid System (12컬럼)</h2>
+            <p>Bootstrap의 Grid System은 화면을 12개의 컬럼으로 나눠서 레이아웃을 구성합니다.</p>
+
+            <div class="row mb-4">
+                <div class="col-12 bg-info text-white p-3 mb-2 rounded">
+                    <strong>col-12 (12 컬럼 - 전체 너비)</strong>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-6 bg-primary text-white p-3 mb-2 rounded">
+                    <strong>col-6 (6 컬럼 - 50%)</strong>
+                </div>
+                <div class="col-6 bg-success text-white p-3 mb-2 rounded">
+                    <strong>col-6 (6 컬럼 - 50%)</strong>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-4 bg-warning text-dark p-3 mb-2 rounded">
+                    <strong>col-4 (33.33%)</strong>
+                </div>
+                <div class="col-4 bg-danger text-white p-3 mb-2 rounded">
+                    <strong>col-4 (33.33%)</strong>
+                </div>
+                <div class="col-4 bg-info text-white p-3 mb-2 rounded">
+                    <strong>col-4 (33.33%)</strong>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-3 bg-secondary text-white p-3 mb-2 rounded">
+                    <strong>col-3</strong>
+                </div>
+                <div class="col-3 bg-secondary text-white p-3 mb-2 rounded">
+                    <strong>col-3</strong>
+                </div>
+                <div class="col-3 bg-secondary text-white p-3 mb-2 rounded">
+                    <strong>col-3</strong>
+                </div>
+                <div class="col-3 bg-secondary text-white p-3 mb-2 rounded">
+                    <strong>col-3</strong>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">반응형 Grid</h5>
+                    <p class="card-text">화면 크기에 따라 컬럼 수를 변경할 수 있습니다:</p>
+                    <div class="code-example">
+                        <pre>&lt;div class="col-12 col-md-6 col-lg-4"&gt;
+  모바일: 100% | 태블릿(md): 50% | 데스크톱(lg): 33.33%
+&lt;/div&gt;</pre>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-6 col-lg-4 bg-light border p-3 mb-2 rounded">
+                            col-12 col-md-6 col-lg-4
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 bg-light border p-3 mb-2 rounded">
+                            col-12 col-md-6 col-lg-4
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 bg-light border p-3 mb-2 rounded">
+                            col-12 col-md-6 col-lg-4
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 3. 버튼 ===== -->
+        <section>
+            <h2 class="section-title" id="buttons">3. 버튼 (Buttons)</h2>
+            <p>Bootstrap의 미리 디자인된 버튼을 사용하면 빠르게 UI를 구축할 수 있습니다.</p>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">기본 버튼</h5>
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                    <button class="btn btn-success">Success</button>
+                    <button class="btn btn-danger">Danger</button>
+                    <button class="btn btn-warning">Warning</button>
+                    <button class="btn btn-info">Info</button>
+                    <button class="btn btn-light">Light</button>
+                    <button class="btn btn-dark">Dark</button>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">버튼 크기</h5>
+                    <button class="btn btn-primary btn-lg">Large Button</button>
+                    <button class="btn btn-primary">Normal Button</button>
+                    <button class="btn btn-primary btn-sm">Small Button</button>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">버튼 상태</h5>
+                    <button class="btn btn-primary">일반</button>
+                    <button class="btn btn-primary" disabled>비활성화</button>
+                    <a href="#" class="btn btn-primary">링크 버튼</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 4. 카드 (Cards) ===== -->
+        <section>
+            <h2 class="section-title" id="cards">4. 카드 (Cards)</h2>
+            <p>카드는 내용을 구조화하고 시각적으로 표현하는 데 매우 유용합니다.</p>
+
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="card-title">카드 1</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">카드 본문 내용이 여기에 들어갑니다.</p>
+                            <p class="card-text"><small class="text-muted">추가 정보</small></p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary">액션</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="card-title">카드 2</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">카드 본문 내용이 여기에 들어갑니다.</p>
+                            <p class="card-text"><small class="text-muted">추가 정보</small></p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success">액션</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="card-title">카드 3</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">카드 본문 내용이 여기에 들어갑니다.</p>
+                            <p class="card-text"><small class="text-muted">추가 정보</small></p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-danger">액션</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 5. 모달 (Modal) ===== -->
+        <section>
+            <h2 class="section-title" id="modal">5. 모달 (Modal)</h2>
+            <p>모달은 사용자의 주의를 끌기 위해 오버레이 위에 표시되는 대화상자입니다.</p>
+
+            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                모달 열기
+            </button>
+
+            <!-- 모달 -->
+            <div class="modal fade" id="exampleModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">모달 제목</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            이것은 모달의 본문입니다. 중요한 정보나 사용자 입력이 필요할 때 사용합니다.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                닫기
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                저장
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 6. 폼 ===== -->
+        <section>
+            <h2 class="section-title" id="form">6. 폼 (Forms)</h2>
+            <p>Bootstrap의 폼 컴포넌트는 기본적으로 좋은 스타일링이 적용되어 있습니다.</p>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="formName" class="form-label">이름</label>
+                            <input type="text" class="form-control" id="formName" placeholder="홍길동">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formEmail" class="form-label">이메일</label>
+                            <input type="email" class="form-control" id="formEmail" placeholder="user@example.com">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formMessage" class="form-label">메시지</label>
+                            <textarea class="form-control" id="formMessage" rows="4"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formSelect" class="form-label">선택</label>
+                            <select class="form-select" id="formSelect">
+                                <option>-- 선택하세요 --</option>
+                                <option>옵션 1</option>
+                                <option>옵션 2</option>
+                                <option>옵션 3</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="formCheck">
+                            <label class="form-check-label" for="formCheck">
+                                동의합니다
+                            </label>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100">제출</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="reset" class="btn btn-secondary w-100">초기화</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7. 유틸리티 클래스 ===== -->
+        <section>
+            <h2 class="section-title">7. 유틸리티 클래스</h2>
+            <p>Bootstrap의 유틸리티 클래스를 사용하면 CSS를 추가로 작성할 필요가 거의 없습니다.</p>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">여백 (Margin & Padding)</h5>
+                    <div class="p-3 mb-3 bg-light border rounded">m-3 (margin: 3rem)</div>
+                    <div class="p-3 mb-3 bg-light border rounded">p-5 (padding: 3rem)</div>
+                    <div class="mt-5 p-3 bg-light border rounded">mt-5 (margin-top: 3rem)</div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">텍스트 정렬 & 색상</h5>
+                    <p class="text-center">text-center (중앙 정렬)</p>
+                    <p class="text-end">text-end (오른쪽 정렬)</p>
+                    <p class="text-danger">text-danger (빨간색 텍스트)</p>
+                    <p class="text-success">text-success (초록색 텍스트)</p>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">배경색</h5>
+                    <div class="p-3 mb-2 bg-primary text-white">bg-primary</div>
+                    <div class="p-3 mb-2 bg-success text-white">bg-success</div>
+                    <div class="p-3 mb-2 bg-danger text-white">bg-danger</div>
+                    <div class="p-3 mb-2 bg-light border">bg-light</div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">표시/숨김</h5>
+                    <div class="d-none d-md-block bg-info text-white p-3">
+                        md 이상에서만 표시됩니다 (desktop)
+                    </div>
+                    <div class="d-block d-md-none bg-warning text-dark p-3">
+                        md 미만에서만 표시됩니다 (mobile)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="text-center py-5 mt-5 border-top">
+            <p>Bootstrap 3단계 실습 완료 ✅</p>
+            <p class="text-muted">
+                💡 팁: Bootstrap 공식 문서를 참고하면 더 많은 컴포넌트를 배울 수 있습니다.
+                <a href="https://getbootstrap.com/docs/5.3/" target="_blank">Bootstrap 공식 문서</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
