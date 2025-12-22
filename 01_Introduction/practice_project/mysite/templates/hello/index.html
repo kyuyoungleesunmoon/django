@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django 첫 프로젝트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: #764ba2;
+        }
+        
+        .messages {
+            list-style: none;
+        }
+        
+        .message-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        
+        .message-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .message-item h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .message-item p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .message-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .message-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .meta {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .empty {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Django 첫 프로젝트</h1>
+        
+        <div class="nav">
+            <a href="{% url 'hello:hello' %}">인사</a>
+            <a href="{% url 'hello:index' %}">메시지</a>
+        </div>
+        
+        {% if messages %}
+            <h2 style="margin-bottom: 20px; color: #333;">저장된 메시지</h2>
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="message-item">
+                        <h3>{{ message.title }}</h3>
+                        <p>{{ message.content }}</p>
+                        <p class="meta">작성: {{ message.created_at|date:"Y-m-d H:i" }}</p>
+                        <a href="{% url 'hello:detail' message.id %}">상세보기 →</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty">
+                <p>아직 메시지가 없습니다.</p>
+                <p>관리자 페이지에서 메시지를 추가해보세요!</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

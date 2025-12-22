@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} - 블로그</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1 { color: #333; margin-bottom: 10px; }
+        .description { color: #999; margin-bottom: 30px; }
+        .article-item { background: white; padding: 20px; margin-bottom: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .article-item h2 { margin: 0 0 10px 0; }
+        .article-item a { color: #667eea; text-decoration: none; }
+        .article-item a:hover { text-decoration: underline; }
+        .meta { color: #999; font-size: 14px; }
+        .back { display: inline-block; margin-bottom: 20px; color: #667eea; text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'articles:list' %}" class="back">← 목록으로</a>
+        
+        <h1>{{ category.name }}</h1>
+        {% if category.description %}<p class="description">{{ category.description }}</p>{% endif %}
+        
+        {% if articles %}
+            {% for article in articles %}
+                <div class="article-item">
+                    <h2><a href="{% url 'articles:detail' article.slug %}">{{ article.title }}</a></h2>
+                    <div class="meta">{{ article.published_at|date:"Y-m-d" }} | 조회: {{ article.view_count }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: #999; padding: 40px;">이 카테고리의 게시글이 없습니다.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
