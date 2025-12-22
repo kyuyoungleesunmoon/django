@@ -1,0 +1,40 @@
+# Django 블로그 프로젝트 의존성 (requirements.txt)
+# 설치: pip install -r requirements.txt
+
+# === 필수 패키지 ===
+
+# Core - Django 웹 프레임워크
+Django==4.2.0
+
+# Image Processing - 이미지 처리
+Pillow==10.0.0
+
+# Python utilities
+python-dateutil==2.8.2
+
+# Optional: API 개발 시 필요
+# djangorestframework==3.14.0
+
+# Optional: 관리자 개선
+# django-admin-interface==0.25.0
+
+# Optional: 폼 개선
+# django-crispy-forms==2.0
+
+# Optional: 배포
+# gunicorn==21.2.0
+# whitenoise==6.5.0
+# psycopg2-binary==2.9.7
+
+# Optional: 데이터베이스 (프로덕션)
+# psycopg2-binary==2.9.7  # PostgreSQL
+
+# Optional: 성능
+# django-cacheops==6.2
+# redis==4.5.4
+
+# Development Only
+# pytest==7.4.0
+# pytest-django==4.5.2
+# black==23.7.0
+# flake8==6.0.0
