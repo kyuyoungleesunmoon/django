@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js + Express 종합 과정 - 이론</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .section-card {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        .code-block {
+            background: #2d2d2d;
+            border-radius: 10px;
+            padding: 0;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .code-header {
+            background: #1e1e1e;
+            padding: 10px 20px;
+            color: #888;
+            font-family: monospace;
+            border-bottom: 1px solid #444;
+        }
+        pre {
+            margin: 0 !important;
+            padding: 20px !important;
+        }
+        .tip-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .modern-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>🚀 Node.js + Express 종합 과정</h1>
+        <p class="lead">최신 트렌드와 라이브러리를 활용한 풀스택 JavaScript 개발</p>
+
+        <div class="alert alert-info">
+            <strong>🎯 학습 목표:</strong> Node.js와 Express를 사용하여 RESTful API 서버를 구축하고, 
+            프론트엔드와 백엔드를 완벽하게 연동하는 방법을 마스터합니다.
+        </div>
+
+        <!-- ==================== Part 1: Node.js 기초 ==================== -->
+        <div class="section-card">
+            <h2>📌 Part 1: Node.js 기초<span class="modern-badge">2024 최신</span></h2>
+            
+            <h3 class="mt-4">1.1 Node.js란?</h3>
+            <p><strong>Node.js</strong>는 Chrome V8 엔진 기반의 JavaScript 런타임 환경입니다.</p>
+            <ul>
+                <li>✅ 브라우저 밖에서 JavaScript 실행</li>
+                <li>✅ 비동기 I/O 처리로 고성능</li>
+                <li>✅ npm을 통한 풍부한 패키지 생태계</li>
+                <li>✅ 프론트엔드와 백엔드를 같은 언어로 개발</li>
+            </ul>
+
+            <h3 class="mt-4">1.2 Node.js 설치 확인</h3>
+            <div class="code-block">
+                <div class="code-header">terminal</div>
+                <pre><code class="language-bash"># Node.js 버전 확인
+node --version
+# v20.x.x 이상 권장
+
+# npm 버전 확인
+npm --version
+# v10.x.x 이상 권장</code></pre>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 설치 안 되어 있다면:</strong><br>
+                <a href="https://nodejs.org" target="_blank">https://nodejs.org</a>에서 LTS 버전 다운로드
+            </div>
+
+            <h3 class="mt-4">1.3 최신 JavaScript 문법 (ES6+)</h3>
+            <div class="code-block">
+                <div class="code-header">modern-javascript.js</div>
+                <pre><code class="language-javascript">// ES6 모듈 import/export
+import express from 'express';
+import { readFile } from 'fs/promises';
+
+// 화살표 함수
+const add = (a, b) => a + b;
+
+// 템플릿 리터럴
+const message = `결과: ${add(5, 3)}`;
+
+// 구조 분해 할당
+const { name, age } = { name: '홍길동', age: 25 };
+
+// async/await (최신 비동기 처리)
+async function fetchData() {
+    try {
+        const data = await fetch('/api/posts');
+        const json = await data.json();
+        return json;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// 옵셔널 체이닝
+const username = user?.profile?.name || 'Guest';
+
+// Nullish 병합 연산자
+const port = process.env.PORT ?? 3000;</code></pre>
+            </div>
+        </div>
+
+        <!-- ==================== Part 2: Express 프레임워크 ==================== -->
+        <div class="section-card">
+            <h2>📌 Part 2: Express 프레임워크<span class="modern-badge">Express 5.x</span></h2>
+            
+            <h3 class="mt-4">2.1 Express란?</h3>
+            <p><strong>Express</strong>는 Node.js를 위한 빠르고 유연한 웹 프레임워크입니다.</p>
+            <ul>
+                <li>✅ 간결한 API</li>
+                <li>✅ 미들웨어 아키텍처</li>
+                <li>✅ 라우팅 시스템</li>
+                <li>✅ RESTful API 구축에 최적</li>
+            </ul>
+
+            <h3 class="mt-4">2.2 프로젝트 초기화</h3>
+            <div class="code-block">
+                <div class="code-header">terminal</div>
+                <pre><code class="language-bash"># 프로젝트 폴더 생성
+mkdir my-express-app
+cd my-express-app
+
+# package.json 생성
+npm init -y
+
+# 필수 패키지 설치
+npm install express cors dotenv
+
+# 개발 도구 설치
+npm install --save-dev nodemon</code></pre>
+            </div>
+
+            <h3 class="mt-4">2.3 package.json 설정 (ES6 모듈)</h3>
+            <div class="code-block">
+                <div class="code-header">package.json</div>
+                <pre><code class="language-json">{
+  "name": "my-express-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Modern Express API Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["express", "api", "rest"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}</code></pre>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 중요:</strong> <code>"type": "module"</code>을 추가하면 ES6 import/export를 사용할 수 있습니다!
+            </div>
+        </div>
+
+        <!-- ==================== Part 3: RESTful API 설계 ==================== -->
+        <div class="section-card">
+            <h2>📌 Part 3: RESTful API 설계<span class="modern-badge">REST 원칙</span></h2>
+            
+            <h3 class="mt-4">3.1 REST란?</h3>
+            <p><strong>REST (Representational State Transfer)</strong>는 웹 서비스 설계 아키텍처입니다.</p>
+
+            <h3 class="mt-4">3.2 HTTP 메서드</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>메서드</th>
+                            <th>용도</th>
+                            <th>예제</th>
+                            <th>CRUD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>GET</code></td>
+                            <td>데이터 조회</td>
+                            <td>GET /api/posts</td>
+                            <td>Read</td>
+                        </tr>
+                        <tr>
+                            <td><code>POST</code></td>
+                            <td>데이터 생성</td>
+                            <td>POST /api/posts</td>
+                            <td>Create</td>
+                        </tr>
+                        <tr>
+                            <td><code>PUT</code></td>
+                            <td>데이터 전체 수정</td>
+                            <td>PUT /api/posts/1</td>
+                            <td>Update</td>
+                        </tr>
+                        <tr>
+                            <td><code>PATCH</code></td>
+                            <td>데이터 부분 수정</td>
+                            <td>PATCH /api/posts/1</td>
+                            <td>Update</td>
+                        </tr>
+                        <tr>
+                            <td><code>DELETE</code></td>
+                            <td>데이터 삭제</td>
+                            <td>DELETE /api/posts/1</td>
+                            <td>Delete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="mt-4">3.3 RESTful 엔드포인트 설계</h3>
+            <div class="code-block">
+                <div class="code-header">API 설계 예제</div>
+                <pre><code class="language-javascript">// 좋은 RESTful API 설계
+GET    /api/posts          // 모든 포스트 조회
+GET    /api/posts/:id      // 특정 포스트 조회
+POST   /api/posts          // 새 포스트 생성
+PUT    /api/posts/:id      // 포스트 전체 수정
+PATCH  /api/posts/:id      // 포스트 부분 수정
+DELETE /api/posts/:id      // 포스트 삭제
+
+// 중첩 리소스
+GET    /api/posts/:id/comments    // 특정 포스트의 댓글
+POST   /api/posts/:id/comments    // 특정 포스트에 댓글 작성</code></pre>
+            </div>
+        </div>
+
+        <!-- ==================== Part 4: 미들웨어 ==================== -->
+        <div class="section-card">
+            <h2>📌 Part 4: 미들웨어 (Middleware)<span class="modern-badge">핵심 개념</span></h2>
+            
+            <h3 class="mt-4">4.1 미들웨어란?</h3>
+            <p>요청(Request)과 응답(Response) 사이에서 실행되는 함수입니다.</p>
+
+            <div class="code-block">
+                <div class="code-header">middleware.js</div>
+                <pre><code class="language-javascript">// 기본 미들웨어 구조
+const myMiddleware = (req, res, next) => {
+    console.log('요청 처리 중...');
+    next(); // 다음 미들웨어로 이동
+};
+
+// 로깅 미들웨어
+const logger = (req, res, next) => {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.url}`);
+    next();
+};
+
+// 인증 미들웨어
+const authenticate = (req, res, next) => {
+    const token = req.headers.authorization;
+    
+    if (!token) {
+        return res.status(401).json({ error: '인증 필요' });
+    }
+    
+    // 토큰 검증 로직...
+    next();
+};
+
+// 에러 핸들링 미들웨어
+const errorHandler = (err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ 
+        error: '서버 오류',
+        message: err.message 
+    });
+};</code></pre>
+            </div>
+
+            <h3 class="mt-4">4.2 내장 미들웨어</h3>
+            <div class="code-block">
+                <div class="code-header">built-in-middleware.js</div>
+                <pre><code class="language-javascript">import express from 'express';
+const app = express();
+
+// JSON 파싱
+app.use(express.json());
+
+// URL-encoded 데이터 파싱
+app.use(express.urlencoded({ extended: true }));
+
+// 정적 파일 제공
+app.use(express.static('public'));</code></pre>
+            </div>
+
+            <h3 class="mt-4">4.3 서드파티 미들웨어</h3>
+            <div class="code-block">
+                <div class="code-header">third-party-middleware.js</div>
+                <pre><code class="language-javascript">import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+
+// CORS 설정
+app.use(cors({
+    origin: 'http://localhost:5500',
+    credentials: true
+}));
+
+// 보안 헤더
+app.use(helmet());
+
+// HTTP 요청 로깅
+app.use(morgan('dev'));</code></pre>
+            </div>
+        </div>
+
+        <!-- ==================== Part 5: 최신 트렌드 ==================== -->
+        <div class="section-card">
+            <h2>📌 Part 5: 2024 최신 트렌드<span class="modern-badge">NEW</span></h2>
+            
+            <h3 class="mt-4">5.1 환경 변수 (.env)</h3>
+            <div class="code-block">
+                <div class="code-header">.env</div>
+                <pre><code class="language-bash">PORT=3000
+NODE_ENV=development
+DATABASE_URL=mongodb://localhost:27017/mydb
+JWT_SECRET=your-secret-key-here
+CORS_ORIGIN=http://localhost:5500</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">server.js</div>
+                <pre><code class="language-javascript">import 'dotenv/config';
+
+const PORT = process.env.PORT ?? 3000;
+const NODE_ENV = process.env.NODE_ENV ?? 'development';
+
+console.log(`서버 환경: ${NODE_ENV}`);
+console.log(`포트: ${PORT}`);</code></pre>
+            </div>
+
+            <h3 class="mt-4">5.2 async/await 패턴</h3>
+            <div class="code-block">
+                <div class="code-header">async-routes.js</div>
+                <pre><code class="language-javascript">// 라우트에서 async/await 사용
+app.get('/api/posts', async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.json(posts);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// 비동기 함수 체이닝
+app.post('/api/posts', async (req, res) => {
+    try {
+        const post = await Post.create(req.body);
+        const savedPost = await post.save();
+        res.status(201).json(savedPost);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});</code></pre>
+            </div>
+
+            <h3 class="mt-4">5.3 Express Router (모듈화)</h3>
+            <div class="code-block">
+                <div class="code-header">routes/posts.js</div>
+                <pre><code class="language-javascript">import express from 'express';
+const router = express.Router();
+
+// GET /api/posts
+router.get('/', async (req, res) => {
+    // 로직...
+});
+
+// POST /api/posts
+router.post('/', async (req, res) => {
+    // 로직...
+});
+
+export default router;</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">server.js</div>
+                <pre><code class="language-javascript">import postsRouter from './routes/posts.js';
+
+app.use('/api/posts', postsRouter);</code></pre>
+            </div>
+
+            <h3 class="mt-4">5.4 데이터 검증 (Joi, Zod)</h3>
+            <div class="code-block">
+                <div class="code-header">validation.js</div>
+                <pre><code class="language-javascript">import Joi from 'joi';
+
+// 포스트 스키마
+const postSchema = Joi.object({
+    title: Joi.string().min(3).max(100).required(),
+    content: Joi.string().min(10).required(),
+    author: Joi.string().required(),
+    tags: Joi.array().items(Joi.string())
+});
+
+// 검증 미들웨어
+const validatePost = (req, res, next) => {
+    const { error } = postSchema.validate(req.body);
+    
+    if (error) {
+        return res.status(400).json({ 
+            error: error.details[0].message 
+        });
+    }
+    
+    next();
+};
+
+// 라우트에 적용
+app.post('/api/posts', validatePost, async (req, res) => {
+    // 검증된 데이터 처리...
+});</code></pre>
+            </div>
+        </div>
+
+        <!-- ==================== Part 6: 프론트엔드 연동 ==================== -->
+        <div class="section-card">
+            <h2>📌 Part 6: 프론트엔드 연동<span class="modern-badge">Fetch API</span></h2>
+            
+            <h3 class="mt-4">6.1 최신 Fetch API</h3>
+            <div class="code-block">
+                <div class="code-header">frontend.js</div>
+                <pre><code class="language-javascript">// GET 요청
+async function getPosts() {
+    try {
+        const response = await fetch('http://localhost:3000/api/posts');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const posts = await response.json();
+        console.log(posts);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// POST 요청
+async function createPost(postData) {
+    try {
+        const response = await fetch('http://localhost:3000/api/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData)
+        });
+        
+        const newPost = await response.json();
+        return newPost;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// 사용 예제
+const newPost = await createPost({
+    title: '새 포스트',
+    content: '내용입니다.',
+    author: '홍길동'
+});</code></pre>
+            </div>
+
+            <h3 class="mt-4">6.2 Axios (선택적)</h3>
+            <div class="code-block">
+                <div class="code-header">axios-example.js</div>
+                <pre><code class="language-javascript">import axios from 'axios';
+
+// Axios 인스턴스 생성
+const api = axios.create({
+    baseURL: 'http://localhost:3000/api',
+    timeout: 5000,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+});
+
+// GET 요청
+const posts = await api.get('/posts');
+
+// POST 요청
+const newPost = await api.post('/posts', {
+    title: '제목',
+    content: '내용'
+});
+
+// 인터셉터 (요청/응답 가로채기)
+api.interceptors.request.use(config => {
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="alert alert-success mt-5">
+            <h3>✅ 이론 학습 완료!</h3>
+            <p class="mb-0">이제 실습 파일(<strong>02-practice-실습</strong>)로 넘어가서 직접 RESTful API 서버를 만들어보세요!</p>
+        </div>
+
+        <div class="text-center mt-5 p-4 bg-light rounded">
+            <h4>📚 다음 단계</h4>
+            <p>02-practice-실습 폴더에서 완전한 Express 서버를 구축합니다.</p>
+            <ul class="list-unstyled">
+                <li>✅ RESTful API 서버 구축</li>
+                <li>✅ CRUD 기능 구현</li>
+                <li>✅ 프론트엔드 연동</li>
+                <li>✅ 실전 프로젝트</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--
+    ✨ Live Server로 실행하기
+    1. VS Code에서 이 파일을 엽니다
+    2. 파일 우클릭 → "Open with Live Server" 선택
+    3. 브라우저가 자동으로 열립니다
+    4. CSS 파일을 수정하면 자동으로 반영됩니다!
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중급 실습 - 반응형 블로그 레이아웃</title>
+    <link rel="stylesheet" href="02-practice-styles.css">
+</head>
+<body>
+    <!-- ============================================
+         🎯 실습 목표: 반응형 블로그 레이아웃 만들기
+         
+         배울 내용:
+         1. Flexbox 활용 (네비게이션, 카드 레이아웃)
+         2. Grid 활용 (메인 레이아웃, 갤러리)
+         3. 미디어 쿼리 (반응형 디자인)
+         4. 복잡한 레이아웃 구성
+    ============================================ -->
+
+    <!-- 헤더: Flexbox -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>✍️ TechBlog</h1>
+                    <p>개발자의 기술 블로그</p>
+                </div>
+                <nav class="nav">
+                    <a href="#home" class="nav-link">홈</a>
+                    <a href="#posts" class="nav-link">포스트</a>
+                    <a href="#categories" class="nav-link">카테고리</a>
+                    <a href="#about" class="nav-link">소개</a>
+                    <a href="#contact" class="nav-link">연락</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero 섹션: Grid -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <article class="hero-main">
+                    <div class="hero-image">
+                        <img src="https://via.placeholder.com/800x400" alt="메인 포스트">
+                    </div>
+                    <div class="hero-content">
+                        <span class="category">Python</span>
+                        <h2>Django로 웹 애플리케이션 만들기</h2>
+                        <p>Python Django 프레임워크를 사용하여 강력한 웹 애플리케이션을 만드는 방법을 알아봅니다.</p>
+                        <div class="meta">
+                            <span>2024-12-17</span>
+                            <span>10분 읽기</span>
+                            <span>조회수 1,234</span>
+                        </div>
+                    </div>
+                </article>
+
+                <aside class="hero-sidebar">
+                    <article class="hero-small">
+                        <img src="https://via.placeholder.com/300x150" alt="포스트 1">
+                        <div class="hero-small-content">
+                            <span class="category">JavaScript</span>
+                            <h3>React Hooks 완벽 가이드</h3>
+                            <span class="date">2024-12-16</span>
+                        </div>
+                    </article>
+                    <article class="hero-small">
+                        <img src="https://via.placeholder.com/300x150" alt="포스트 2">
+                        <div class="hero-small-content">
+                            <span class="category">CSS</span>
+                            <h3>CSS Grid 마스터하기</h3>
+                            <span class="date">2024-12-15</span>
+                        </div>
+                    </article>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠: Grid 레이아웃 -->
+    <main class="main">
+        <div class="container">
+            <div class="main-grid">
+                
+                <!-- 콘텐츠 영역 -->
+                <div class="content">
+                    <h2 class="section-title">📚 최신 포스트</h2>
+                    
+                    <!-- 포스트 카드: Flexbox -->
+                    <div class="posts-grid">
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250" alt="포스트 1">
+                                <span class="post-badge">New</span>
+                            </div>
+                            <div class="post-content">
+                                <div class="post-tags">
+                                    <span class="tag">HTML</span>
+                                    <span class="tag">CSS</span>
+                                </div>
+                                <h3>웹 접근성을 고려한 HTML 작성법</h3>
+                                <p>모든 사용자가 웹 콘텐츠에 접근할 수 있도록 하는 HTML 작성 방법을 알아봅니다.</p>
+                                <div class="post-footer">
+                                    <div class="author">
+                                        <img src="https://via.placeholder.com/40" alt="작성자">
+                                        <span>홍길동</span>
+                                    </div>
+                                    <span class="date">2024-12-17</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250" alt="포스트 2">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-tags">
+                                    <span class="tag">JavaScript</span>
+                                </div>
+                                <h3>비동기 프로그래밍: Promise와 Async/Await</h3>
+                                <p>JavaScript의 비동기 처리 방법인 Promise와 async/await를 깊이 있게 다룹니다.</p>
+                                <div class="post-footer">
+                                    <div class="author">
+                                        <img src="https://via.placeholder.com/40" alt="작성자">
+                                        <span>김철수</span>
+                                    </div>
+                                    <span class="date">2024-12-16</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250" alt="포스트 3">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-tags">
+                                    <span class="tag">Python</span>
+                                    <span class="tag">Django</span>
+                                </div>
+                                <h3>Django REST Framework로 API 만들기</h3>
+                                <p>Django REST Framework를 사용하여 RESTful API를 구축하는 방법을 단계별로 설명합니다.</p>
+                                <div class="post-footer">
+                                    <div class="author">
+                                        <img src="https://via.placeholder.com/40" alt="작성자">
+                                        <span>이영희</span>
+                                    </div>
+                                    <span class="date">2024-12-15</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250" alt="포스트 4">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-tags">
+                                    <span class="tag">Database</span>
+                                </div>
+                                <h3>SQL vs NoSQL: 올바른 선택하기</h3>
+                                <p>관계형 데이터베이스와 NoSQL 데이터베이스의 차이점과 적합한 사용 사례를 비교합니다.</p>
+                                <div class="post-footer">
+                                    <div class="author">
+                                        <img src="https://via.placeholder.com/40" alt="작성자">
+                                        <span>박민수</span>
+                                    </div>
+                                    <span class="date">2024-12-14</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250" alt="포스트 5">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-tags">
+                                    <span class="tag">DevOps</span>
+                                </div>
+                                <h3>Docker와 Kubernetes 시작하기</h3>
+                                <p>컨테이너 기술의 기본부터 Kubernetes를 이용한 오케스트레이션까지 알아봅니다.</p>
+                                <div class="post-footer">
+                                    <div class="author">
+                                        <img src="https://via.placeholder.com/40" alt="작성자">
+                                        <span>정수진</span>
+                                    </div>
+                                    <span class="date">2024-12-13</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="post-card">
+                            <div class="post-image">
+                                <img src="https://via.placeholder.com/400x250" alt="포스트 6">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-tags">
+                                    <span class="tag">CSS</span>
+                                    <span class="tag">디자인</span>
+                                </div>
+                                <h3>반응형 웹 디자인 베스트 프랙티스</h3>
+                                <p>모든 기기에서 완벽하게 보이는 반응형 웹사이트를 만드는 실전 팁과 기법을 공유합니다.</p>
+                                <div class="post-footer">
+                                    <div class="author">
+                                        <img src="https://via.placeholder.com/40" alt="작성자">
+                                        <span>최지원</span>
+                                    </div>
+                                    <span class="date">2024-12-12</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- 사이드바 -->
+                <aside class="sidebar">
+                    <!-- 검색 -->
+                    <div class="widget">
+                        <h3>🔍 검색</h3>
+                        <form class="search-form">
+                            <input type="text" placeholder="포스트 검색...">
+                            <button type="submit">검색</button>
+                        </form>
+                    </div>
+
+                    <!-- 카테고리 -->
+                    <div class="widget">
+                        <h3>📁 카테고리</h3>
+                        <ul class="category-list">
+                            <li><a href="#">Python <span>(15)</span></a></li>
+                            <li><a href="#">JavaScript <span>(23)</span></a></li>
+                            <li><a href="#">CSS <span>(18)</span></a></li>
+                            <li><a href="#">Django <span>(12)</span></a></li>
+                            <li><a href="#">React <span>(20)</span></a></li>
+                            <li><a href="#">DevOps <span>(8)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- 인기 포스트 -->
+                    <div class="widget">
+                        <h3>🔥 인기 포스트</h3>
+                        <div class="popular-posts">
+                            <article class="popular-post">
+                                <img src="https://via.placeholder.com/80" alt="포스트">
+                                <div>
+                                    <h4>JavaScript 완벽 가이드</h4>
+                                    <span>2024-12-10</span>
+                                </div>
+                            </article>
+                            <article class="popular-post">
+                                <img src="https://via.placeholder.com/80" alt="포스트">
+                                <div>
+                                    <h4>Python 고급 기법</h4>
+                                    <span>2024-12-08</span>
+                                </div>
+                            </article>
+                            <article class="popular-post">
+                                <img src="https://via.placeholder.com/80" alt="포스트">
+                                <div>
+                                    <h4>웹 성능 최적화</h4>
+                                    <span>2024-12-05</span>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- 태그 클라우드 -->
+                    <div class="widget">
+                        <h3>🏷️ 태그</h3>
+                        <div class="tag-cloud">
+                            <a href="#" class="cloud-tag">HTML</a>
+                            <a href="#" class="cloud-tag">CSS</a>
+                            <a href="#" class="cloud-tag">JavaScript</a>
+                            <a href="#" class="cloud-tag">Python</a>
+                            <a href="#" class="cloud-tag">Django</a>
+                            <a href="#" class="cloud-tag">React</a>
+                            <a href="#" class="cloud-tag">Vue</a>
+                            <a href="#" class="cloud-tag">Node.js</a>
+                            <a href="#" class="cloud-tag">Docker</a>
+                            <a href="#" class="cloud-tag">AWS</a>
+                        </div>
+                    </div>
+
+                    <!-- 뉴스레터 -->
+                    <div class="widget newsletter">
+                        <h3>📬 뉴스레터</h3>
+                        <p>최신 포스트를 이메일로 받아보세요!</p>
+                        <form>
+                            <input type="email" placeholder="이메일 주소">
+                            <button type="submit">구독</button>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터: Flexbox -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>TechBlog</h3>
+                    <p>개발자를 위한 기술 블로그입니다. 웹 개발, 프로그래밍, 데이터베이스 등 다양한 주제를 다룹니다.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>카테고리</h3>
+                    <ul>
+                        <li><a href="#">Python</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><a href="#">Django</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>링크</h3>
+                    <ul>
+                        <li><a href="#">소개</a></li>
+                        <li><a href="#">연락처</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>소셜 미디어</h3>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TechBlog. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         🎯 실습 체크리스트
+         
+         ✅ Flexbox 활용
+         - 헤더 네비게이션 (justify-content, align-items)
+         - 포스트 카드 내부 레이아웃
+         - 푸터 구조
+         - 모바일에서 flex-direction 변경
+         
+         ✅ Grid 활용
+         - Hero 섹션 (메인 + 사이드바)
+         - 메인 레이아웃 (콘텐츠 + 사이드바)
+         - 포스트 그리드 (반응형 컬럼 수)
+         
+         ✅ 반응형 디자인
+         - viewport 설정
+         - 미디어 쿼리 (768px, 576px)
+         - 컬럼 수 변경 (3컬럼 → 2컬럼 → 1컬럼)
+         - 네비게이션 모바일 대응
+    ============================================ -->
+</body>
+</html>
