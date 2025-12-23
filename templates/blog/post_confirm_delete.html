@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}삭제 확인{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-body">
+                <h5 class="card-title text-danger">포스트 삭제 경고</h5>
+                <p class="card-text">정말로 "<strong>{{ object.title }}</strong>"을 삭제하시겠습니까?</p>
+                <p class="text-muted small">이 작업은 되돌릴 수 없습니다.</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">삭제</button>
+                    <a href="{% url 'blog:post_detail' object.pk %}" class="btn btn-secondary">취소</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
